@@ -25,8 +25,8 @@ public final class ResultFragment_
 
     private final OnViewChangedNotifier onViewChangedNotifier_ = new OnViewChangedNotifier();
     private View contentView_;
-    public final static String SUBJECT_ARG = "subject";
     public final static String STUDY_ARG = "study";
+    public final static String SUBJECT_ARG = "subject";
     private Handler handler_ = new Handler(Looper.getMainLooper());
 
     @Override
@@ -75,21 +75,6 @@ public final class ResultFragment_
         subjectCountTv = ((TextView) hasViews.findViewById(kr.ewhapp.handy.R.id.subject_count_tv));
         studyCountTv = ((TextView) hasViews.findViewById(kr.ewhapp.handy.R.id.study_count_tv));
         {
-            View view = hasViews.findViewById(kr.ewhapp.handy.R.id.result_main_btn);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        ResultFragment_.this.replaceTimeline();
-                    }
-
-                }
-                );
-            }
-        }
-        {
             View view = hasViews.findViewById(kr.ewhapp.handy.R.id.result_ok_btn);
             if (view!= null) {
                 view.setOnClickListener(new OnClickListener() {
@@ -104,33 +89,34 @@ public final class ResultFragment_
                 );
             }
         }
+        {
+            View view = hasViews.findViewById(kr.ewhapp.handy.R.id.result_main_btn);
+            if (view!= null) {
+                view.setOnClickListener(new OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View view) {
+                        ResultFragment_.this.replaceTimeline();
+                    }
+
+                }
+                );
+            }
+        }
         init();
     }
 
     private void injectFragmentArguments_() {
         Bundle args_ = getArguments();
         if (args_!= null) {
-            if (args_.containsKey(SUBJECT_ARG)) {
-                subject = args_.getString(SUBJECT_ARG);
-            }
             if (args_.containsKey(STUDY_ARG)) {
                 study = args_.getString(STUDY_ARG);
             }
-        }
-    }
-
-    @Override
-    public void setStudyScore(final StudyModel data) {
-        handler_.post(new Runnable() {
-
-
-            @Override
-            public void run() {
-                ResultFragment_.super.setStudyScore(data);
+            if (args_.containsKey(SUBJECT_ARG)) {
+                subject = args_.getString(SUBJECT_ARG);
             }
-
         }
-        );
     }
 
     @Override
@@ -141,6 +127,20 @@ public final class ResultFragment_
             @Override
             public void run() {
                 ResultFragment_.super.setTotalScore(data);
+            }
+
+        }
+        );
+    }
+
+    @Override
+    public void setStudyScore(final StudyModel data) {
+        handler_.post(new Runnable() {
+
+
+            @Override
+            public void run() {
+                ResultFragment_.super.setStudyScore(data);
             }
 
         }
@@ -161,13 +161,13 @@ public final class ResultFragment_
             return fragment_;
         }
 
-        public ResultFragment_.FragmentBuilder_ subject(String subject) {
-            args_.putString(SUBJECT_ARG, subject);
+        public ResultFragment_.FragmentBuilder_ study(String study) {
+            args_.putString(STUDY_ARG, study);
             return this;
         }
 
-        public ResultFragment_.FragmentBuilder_ study(String study) {
-            args_.putString(STUDY_ARG, study);
+        public ResultFragment_.FragmentBuilder_ subject(String subject) {
+            args_.putString(SUBJECT_ARG, subject);
             return this;
         }
 

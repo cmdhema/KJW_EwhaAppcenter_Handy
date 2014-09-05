@@ -25,9 +25,9 @@ public final class ImageSelectFragment_
     private final OnViewChangedNotifier onViewChangedNotifier_ = new OnViewChangedNotifier();
     private View contentView_;
     public final static String FLAG_ARG = "flag";
+    public final static String STUDY_ARG = "study";
     public final static String URI_ARG = "uri";
     public final static String SUBJECT_ARG = "subject";
-    public final static String STUDY_ARG = "study";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,8 +70,8 @@ public final class ImageSelectFragment_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        containerLayout = ((RelativeLayout) hasViews.findViewById(kr.ewhapp.handy.R.id.photo_container));
         photoIv = ((ImageView) hasViews.findViewById(kr.ewhapp.handy.R.id.photo_iv));
+        containerLayout = ((RelativeLayout) hasViews.findViewById(kr.ewhapp.handy.R.id.photo_container));
         {
             View view = hasViews.findViewById(kr.ewhapp.handy.R.id.photo_container);
             if (view!= null) {
@@ -96,14 +96,14 @@ public final class ImageSelectFragment_
             if (args_.containsKey(FLAG_ARG)) {
                 flag = args_.getString(FLAG_ARG);
             }
+            if (args_.containsKey(STUDY_ARG)) {
+                study = args_.getString(STUDY_ARG);
+            }
             if (args_.containsKey(URI_ARG)) {
                 uri = args_.getString(URI_ARG);
             }
             if (args_.containsKey(SUBJECT_ARG)) {
                 subject = args_.getString(SUBJECT_ARG);
-            }
-            if (args_.containsKey(STUDY_ARG)) {
-                study = args_.getString(STUDY_ARG);
             }
         }
     }
@@ -127,6 +127,11 @@ public final class ImageSelectFragment_
             return this;
         }
 
+        public ImageSelectFragment_.FragmentBuilder_ study(String study) {
+            args_.putString(STUDY_ARG, study);
+            return this;
+        }
+
         public ImageSelectFragment_.FragmentBuilder_ uri(String uri) {
             args_.putString(URI_ARG, uri);
             return this;
@@ -134,11 +139,6 @@ public final class ImageSelectFragment_
 
         public ImageSelectFragment_.FragmentBuilder_ subject(String subject) {
             args_.putString(SUBJECT_ARG, subject);
-            return this;
-        }
-
-        public ImageSelectFragment_.FragmentBuilder_ study(String study) {
-            args_.putString(STUDY_ARG, study);
             return this;
         }
 
